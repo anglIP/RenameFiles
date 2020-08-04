@@ -9,11 +9,50 @@ public class renameFiles
     public static final String directoryPath = "C:/Users/Angel/Desktop/Carpetas/Fondos/Fondos 2020/Editados/Fondos/Aleatorios/Prueba/";
     public static final String filePath = "C:/Users/Angel/Desktop/Carpetas/Fondos/Fondos 2020/Editados/Fondos/Aleatorios/Prueba/720Forza.png";
 
-    // Methods
+    // Main
     public static void main(String args[])
     {
-        newDate();
-        renameFile();
+        String rutas[];
+		File f = new File(directoryPath);
+
+		rutas = f.list();
+
+		for (String ruta : rutas)
+		{
+            // System.out.println(ruta);
+			newDate(ruta);
+            // renameFile();
+		}
+    }
+
+    // Methods
+    public static void newDate(String rutaFichero)
+    {
+        try
+		{
+			File oldFile = new File(directoryPath + rutaFichero);
+
+			SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+
+			// Mostramos la última fecha de modificación
+			System.out.println("Ultima fecha de modificacion original: " + dateFormat.format(oldFile.lastModified()));
+
+			// Establecemos la nueva fecha para el fichero
+			// Intentar obtener la fecha del sistema
+			String newLastModifiedString = "07/27/2020";
+
+			// Necesitamos convertir la nueva fecha a milisegundos.
+			Date newLastModifiedDate = dateFormat.parse(newLastModifiedString);
+			oldFile.setLastModified(newLastModifiedDate.getTime());
+
+			// Mostramos la nueva fecha de modificación
+			System.out.println("Nueva ultima fecha de modificacion: " + dateFormat.format(oldFile.lastModified()));
+			System.out.println();
+		}
+		catch (ParseException e)
+		{
+			e.getMessage();
+		}
     }
 
 
@@ -64,34 +103,5 @@ public class renameFiles
             {
                 e.getMessage();
             }
-    }
-
-    public static void newDate()
-    {
-        try
-		{
-			File oldFile = new File(filePath);
-
-			SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-
-			// Mostramos la última fecha de modificación
-			System.out.println("Ultima fecha de modificacion original: " + dateFormat.format(oldFile.lastModified()));
-
-			// Establecemos la nueva fecha para el fichero
-			// Intentar obtener la fecha del sistema
-			String newLastModifiedString = "07/27/2020";
-
-			// Necesitamos convertir la nueva fecha a milisegundos.
-			Date newLastModifiedDate = dateFormat.parse(newLastModifiedString);
-			oldFile.setLastModified(newLastModifiedDate.getTime());
-
-			// Mostramos la nueva fecha de modificación
-			System.out.println("Nueva ultima fecha de modificacion: " + dateFormat.format(oldFile.lastModified()));
-			System.out.println();
-		}
-		catch (ParseException e)
-		{
-			e.getMessage();
-		}
     }
 }
