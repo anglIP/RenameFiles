@@ -21,7 +21,7 @@ public class renameFiles
 		{
             // System.out.println(ruta);
 			newDate(ruta);
-            // renameFile();
+            renameFile(ruta);
 		}
     }
 
@@ -57,12 +57,12 @@ public class renameFiles
 
 
     // El fichero a renombrar a de ser un fichero NUEVO. Si el fichero YA HA SIDO RENOMBRADO, NO SE VA A RENOMBRAR OTRA VEZ.
-    public static void renameFile()
+    public static void renameFile(String rutaFichero)
     {
         try
         {
             // Open the file.
-            File oldFile = new File(filePath);
+            File oldFile = new File(directoryPath + rutaFichero);
 
             // Getting the name and extension of the file.
             String name = oldFile.getName();
